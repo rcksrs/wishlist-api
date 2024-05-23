@@ -9,5 +9,9 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://admin:admin@localhost:27017
-      database: wishlist_db
+      uri: ${APP_DATA_MONGODB_URI:mongodb://admin:admin@localhost:27017}
+      database: ${APP_DATA_MONGODB_DATABASE:wishlist_db}
+
+app:
+  data:
+    max-product-items: ${APP_DATA_MAX_PRODUCT_ITEMS:20}

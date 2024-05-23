@@ -7,12 +7,16 @@ import com.rcksrs.wishlist.domain.exception.WishlistLimitExceededException;
 import com.rcksrs.wishlist.domain.repository.WishlistRepository;
 import com.rcksrs.wishlist.domain.usecase.SaveProductUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class SaveProductUseCaseImpl implements SaveProductUseCase {
     private final WishlistRepository wishlistRepository;
+
+    @Value("${app.data.max-product-items}")
+    private Integer maxProductItems;
 
     @Override
     public ProductResponse save(String userId, ProductRequest request) {
@@ -25,7 +29,7 @@ public class SaveProductUseCaseImpl implements SaveProductUseCase {
         }
 
         var products = wishlist.get().getProducts();
-        if (products.size() > 20) throw new WishlistLimitExceededException();
+        if (products.size() >= maxProductItems) throw new WishlistLimitExceededException();
         if (products.add(product)) {
             wishlistRepository.save(wishlist.get());
             return new ProductResponse(product);
