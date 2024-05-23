@@ -27,6 +27,15 @@ public class FindProductUseCaseImpl implements FindProductUseCase {
     }
 
     @Override
+    public Set<ProductResponse> findByTitle(String userId, String title) {
+        var wishlist = wishlistRepository.findByUserId(userId).orElseThrow(WishlistNotFoundException::new);
+        return wishlist.getProducts().stream()
+                .filter(product -> product.getTitle().toLowerCase().contains(title.trim().toLowerCase()))
+                .map(ProductResponse::new)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
     public Set<ProductResponse> findAll(String userId) {
         var wishlist = wishlistRepository.findByUserId(userId).orElseThrow(WishlistNotFoundException::new);
         return wishlist.getProducts().stream()
