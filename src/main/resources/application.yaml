@@ -12,6 +12,11 @@ spring:
       uri: ${APP_DATA_MONGODB_URI:mongodb://admin:admin@localhost:27017}
       database: ${APP_DATA_MONGODB_DATABASE:wishlist_db}
 
+springdoc:
+  default-produces-media-type: application/json
+  swagger-ui:
+    tagsSorter: alpha
+
 app:
   data:
     max-product-items: ${APP_DATA_MAX_PRODUCT_ITEMS:20}
