@@ -1,11 +1,18 @@
 package com.rcksrs.wishlist.domain.dto;
 
 import com.rcksrs.wishlist.domain.entity.Product;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public record ProductRequest(String sku, String brand, String title, String description, BigDecimal price) {
+public record ProductRequest(
+        @NotBlank String sku,
+        @NotBlank String title,
+        String brand,
+        String description,
+        BigDecimal price
+) {
     public Product toEntity() {
         return Product.builder()
                 .id(UUID.randomUUID().toString())

@@ -5,6 +5,7 @@ import com.rcksrs.wishlist.domain.dto.ProductResponse;
 import com.rcksrs.wishlist.domain.usecase.DeleteProductUseCase;
 import com.rcksrs.wishlist.domain.usecase.FindProductUseCase;
 import com.rcksrs.wishlist.domain.usecase.SaveProductUseCase;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping("/user/{userId}")
-    public ResponseEntity<ProductResponse> save(@PathVariable String userId, @RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> save(@PathVariable String userId, @RequestBody @Valid ProductRequest request) {
         return ResponseEntity.ok(saveProductUseCase.save(userId, request));
     }
 
