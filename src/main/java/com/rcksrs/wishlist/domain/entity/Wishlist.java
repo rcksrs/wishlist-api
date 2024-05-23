@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -21,7 +21,7 @@ public class Wishlist {
     @Id
     private String id;
     private String userId;
-    private List<Product> products;
+    private Set<Product> products;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
@@ -29,6 +29,6 @@ public class Wishlist {
         this.id = UUID.randomUUID().toString();
         this.userId = userId;
         this.createdAt = LocalDateTime.now();
-        this.products = Collections.singletonList(product);
+        this.products = Collections.singleton(product);
     }
 }

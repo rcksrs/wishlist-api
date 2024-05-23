@@ -1,12 +1,14 @@
 package com.rcksrs.wishlist.domain.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Data
 @Builder
+@EqualsAndHashCode(of = "sku")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     private String id;
     private String sku;
@@ -14,4 +16,8 @@ public class Product {
     private String title;
     private String description;
     private BigDecimal price;
+
+    public Product(String sku) {
+        this.sku = sku;
+    }
 }
