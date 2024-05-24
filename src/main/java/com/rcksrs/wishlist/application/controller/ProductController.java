@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class ProductController {
     @PostMapping("/user/{userId}")
     @Operation(summary = "Salva um produto na wishlist do usuário")
     public ResponseEntity<ProductResponse> save(@PathVariable String userId, @RequestBody @Valid ProductRequest request) {
-        return ResponseEntity.ok(saveProductUseCase.save(userId, request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(saveProductUseCase.save(userId, request));
     }
 
     @DeleteMapping("/user/{userId}/sku/{sku}")
