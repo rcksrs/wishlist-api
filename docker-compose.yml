@@ -11,5 +11,18 @@ services:
     volumes:
       - mongodb_data:/data/db
 
+  wishlist-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      APP_DATA_MONGODB_URI: mongodb://admin:admin@mongodb:27017
+      APP_DATA_MONGODB_DATABASE: wishlist_db
+      APP_DATA_MAX_PRODUCT_ITEMS: 20
+
 volumes:
   mongodb_data:
